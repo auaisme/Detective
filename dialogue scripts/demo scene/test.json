@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Maid",
+        "text": "I... I came in to get them some fresh towels... I... I...",
+        "speaker_type": "WITNESS"
+    },
+    {
+        "name": "Detective",
+        "text": "It's okay, ma'am. Take your time. You don't have to rush.",
+        "speaker_type": "PLAYER"
+    },
+    {
+        "name": "Detective",
+        "text": "...",
+        "speaker_type": "PLAYER"
+    },
+    {
+        "name": "Detective",
+        "text": "But, try to remember as much as you can, please.",
+        "speaker_type": "PLAYER"
+    }
+]
