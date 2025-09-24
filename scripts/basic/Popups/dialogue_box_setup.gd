@@ -1,6 +1,9 @@
 extends Control
 
 @export var dead_body_pop_up: CanvasLayer
+@export var glasses_pop_up: CanvasLayer
+
+var POP_UPS: Dictionary[String, CanvasLayer] = {}
 
 @export var dialogue_box: CanvasLayer
 @export var panel: Panel
@@ -18,6 +21,13 @@ const COLORS = {
 	"OBJECT": Color.DARK_GRAY,
 	"SUSPECT": Color.CRIMSON
 }
+
+func _ready() -> void:
+	POP_UPS = {
+		"dead body": dead_body_pop_up,
+		"glasses": glasses_pop_up
+	}
+	return
 
 func setup_dialogue_box() -> void:	
 	var viewport = Vector2(get_viewport().size.x, get_viewport().size.y)
@@ -50,6 +60,7 @@ func display_line():
 
 func _input(event):
 	if event.is_action_pressed("ui_accept") or event.is_action_pressed("interact"):
+		var active_pop_up = POP_UPS.values().filter(func(n): return n.visible)
 		# change this to check if any item in popup is open
 		if (dialogue_box.visible):
 			current_index += 1
@@ -57,6 +68,6 @@ func _input(event):
 				display_line()
 			else:
 				dialogue_box.hide()
-		elif (dead_body_pop_up.visible):
-			dead_body_pop_up.hide()
+		elif (active_pop_up):
+			active_pop_up[0].hide()
 			pass

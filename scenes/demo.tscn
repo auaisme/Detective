@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=4 uid="uid://x4eo8pq6pluy"]
+[gd_scene load_steps=60 format=4 uid="uid://x4eo8pq6pluy"]
 
 [ext_resource type="Script" uid="uid://j3t6t45v4hti" path="res://scripts/basic/movement/player.gd" id="1_ba4lm"]
 [ext_resource type="Script" uid="uid://bhq28ttricpf4" path="res://scripts/basic/Popups/dialogue_box_setup.gd" id="1_vephn"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://1uy1luyogyed" path="res://assets/prompts/magnifying_glass_pixels.png" id="8_l53ft"]
 [ext_resource type="Texture2D" uid="uid://cgeflsysp3dhd" path="res://assets/prompts/speach_bubble_pixels.png" id="9_xe7ic"]
 [ext_resource type="Texture2D" uid="uid://cx24a2wbiatcv" path="res://assets/enviornment/case 1/wall corner.png" id="13_6cg1f"]
+[ext_resource type="Texture2D" uid="uid://bvmjyyly7ark5" path="res://assets/enviornment/case 1/case critical/2_glasses_pixels.png" id="13_kxneo"]
 [ext_resource type="Texture2D" uid="uid://dabsbsys02ls7" path="res://assets/enviornment/case 1/wall straight.png" id="13_s3vvr"]
 [ext_resource type="Texture2D" uid="uid://cy55c8mk5r4k8" path="res://assets/enviornment/case 1/bed_left.tres" id="14_6cg1f"]
 [ext_resource type="Texture2D" uid="uid://c2tx0dkrm1idr" path="res://assets/enviornment/case 1/floor_1_pixels.png" id="17_xe7ic"]
@@ -226,6 +227,9 @@ size = Vector2(80, 50)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l53ft"]
 size = Vector2(108, 118)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kxneo"]
+size = Vector2(88, 12)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6cg1f"]
 size = Vector2(30, 692)
@@ -513,7 +517,7 @@ tile_size = Vector2i(109, 111)
 sources/1 = SubResource("TileSetAtlasSource_c0h4v")
 sources/2 = SubResource("TileSetAtlasSource_kxneo")
 
-[node name="Control" type="Control" node_paths=PackedStringArray("dead_body_pop_up", "dialogue_box", "panel")]
+[node name="Control" type="Control" node_paths=PackedStringArray("dead_body_pop_up", "glasses_pop_up", "dialogue_box", "panel")]
 y_sort_enabled = true
 layout_mode = 3
 anchors_preset = 15
@@ -522,7 +526,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vephn")
-dead_body_pop_up = NodePath("Inspectable/PopUp")
+dead_body_pop_up = NodePath("Inspectable Body/PopUp")
+glasses_pop_up = NodePath("Inspectable Glasses/PopUp")
 dialogue_box = NodePath("Dialogue")
 panel = NodePath("Dialogue/Panel")
 
@@ -568,12 +573,12 @@ texture = ExtResource("3_6gsge")
 position = Vector2(-2, -66)
 shape = SubResource("RectangleShape2D_6gsge")
 
-[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("dialogue_box", "popup_layer", "sprite", "prompt_interact", "inspect_prompt", "talk_prompt") groups=["player"]]
+[node name="Player" type="CharacterBody2D" parent="." node_paths=PackedStringArray("base", "dialogue_box", "sprite", "prompt_interact", "inspect_prompt", "talk_prompt") groups=["player"]]
 position = Vector2(1, 1)
 script = ExtResource("1_ba4lm")
+base = NodePath("..")
 speed = 750.0
 dialogue_box = NodePath("../Dialogue")
-popup_layer = NodePath("../Inspectable/PopUp")
 sprite = NodePath("Sprite2D")
 prompt_interact = NodePath("E Prompt")
 inspect_prompt = NodePath("Inspect Prompt")
@@ -610,7 +615,7 @@ position = Vector2(17, -93)
 scale = Vector2(1.46875, 1.40625)
 sprite_frames = SubResource("SpriteFrames_dgtg0")
 
-[node name="Interactable" type="RigidBody2D" parent="." node_paths=PackedStringArray("dialogue_box", "scene_base") groups=["interactable"]]
+[node name="Interactable Maid" type="RigidBody2D" parent="." node_paths=PackedStringArray("dialogue_box", "scene_base") groups=["interactable"]]
 position = Vector2(294, 97)
 gravity_scale = 0.0
 lock_rotation = true
@@ -620,14 +625,14 @@ dialogue_box = NodePath("../Dialogue")
 scene_base = NodePath("..")
 dialogue_script_path = "res://dialogue scripts/demo scene/test.json"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable Maid"]
 shape = SubResource("RectangleShape2D_e66cg")
 
-[node name="Sprite2D" type="Sprite2D" parent="Interactable"]
+[node name="Sprite2D" type="Sprite2D" parent="Interactable Maid"]
 texture = ExtResource("5_5fme1")
 flip_h = true
 
-[node name="Inspectable" type="RigidBody2D" parent="." node_paths=PackedStringArray("display_me", "panel") groups=["inspectable"]]
+[node name="Inspectable Body" type="RigidBody2D" parent="." node_paths=PackedStringArray("display_me", "panel") groups=["inspectable"]]
 position = Vector2(-266, -1)
 gravity_scale = 0.0
 lock_rotation = true
@@ -636,23 +641,52 @@ script = ExtResource("5_x0xbu")
 display_me = NodePath("PopUp")
 panel = NodePath("PopUp/Panel")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Inspectable"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inspectable Body"]
 position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_l53ft")
 
-[node name="Sprite2D" type="Sprite2D" parent="Inspectable"]
+[node name="Sprite2D" type="Sprite2D" parent="Inspectable Body"]
 texture = ExtResource("8_5fme1")
 
-[node name="PopUp" type="CanvasLayer" parent="Inspectable"]
+[node name="PopUp" type="CanvasLayer" parent="Inspectable Body"]
 visible = false
 
-[node name="Panel" type="Panel" parent="Inspectable/PopUp"]
+[node name="Panel" type="Panel" parent="Inspectable Body/PopUp"]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Sprite2D" type="Sprite2D" parent="Inspectable/PopUp/Panel"]
+[node name="Sprite2D" type="Sprite2D" parent="Inspectable Body/PopUp/Panel"]
 scale = Vector2(4, 4)
 texture = ExtResource("8_5fme1")
+
+[node name="Inspectable Glasses" type="RigidBody2D" parent="." node_paths=PackedStringArray("display_me", "panel") groups=["inspectable"]]
+position = Vector2(1, -219)
+gravity_scale = 0.0
+lock_rotation = true
+freeze = true
+script = ExtResource("5_x0xbu")
+display_me = NodePath("PopUp")
+panel = NodePath("PopUp/Panel")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Inspectable Glasses"]
+position = Vector2(-1, -68)
+shape = SubResource("RectangleShape2D_kxneo")
+
+[node name="Sprite2D" type="Sprite2D" parent="Inspectable Glasses"]
+position = Vector2(-1, -26)
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("13_kxneo")
+
+[node name="PopUp" type="CanvasLayer" parent="Inspectable Glasses"]
+visible = false
+
+[node name="Panel" type="Panel" parent="Inspectable Glasses/PopUp"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Inspectable Glasses/PopUp/Panel"]
+scale = Vector2(0.835, 0.835)
+texture = ExtResource("13_kxneo")
 
 [node name="Dialogue" type="CanvasLayer" parent="."]
 visible = false

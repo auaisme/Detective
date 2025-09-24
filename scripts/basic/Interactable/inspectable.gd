@@ -16,5 +16,6 @@ extends RigidBody2D
 func interact() -> void:
 	if (!display_me.visible):
 		panel.position = Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2)
+		panel.size = Vector2(0, 0)
 		display_me.visible = true
 	return

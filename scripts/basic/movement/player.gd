@@ -1,8 +1,10 @@
 extends CharacterBody2D
 
+@export var base: Control
+
 @export var speed: float
 @export var dialogue_box: CanvasLayer
-@export var popup_layer: CanvasLayer
+#@export var popup_layer: CanvasLayer
 @export var sprite: Sprite2D
 @export var prompt_interact: AnimatedSprite2D
 @export var inspect_prompt: AnimatedSprite2D
@@ -51,7 +53,8 @@ func measure_movement_input() -> void:
 
 func move() -> void:
 	# disallow movement when dialogue box is open
-	if dialogue_box.visible or popup_layer.visible: return
+	#if dialogue_box.visible or popup_layer.visible: return
+	if dialogue_box.visible or (base.POP_UPS.values().filter(func(n): return n.visible)): return
 	# do any extra animation control stuff here
 	move_and_slide()
 
@@ -94,7 +97,7 @@ func interact_not_available(body) -> void:
 	return
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if dialogue_box.visible or popup_layer.visible:
+	if dialogue_box.visible or (base.POP_UPS.values().filter(func(n): return n.visible)):
 		return
 	if !(event is InputEventKey):
 		return
