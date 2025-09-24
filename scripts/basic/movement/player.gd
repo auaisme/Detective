@@ -13,7 +13,7 @@ var interactable: Node2D = null
 signal interact_signal
 
 const CODES = {
-	"INTERACT": 69
+	"INTERACT": 69 # this is the keycode, not a joke number
 }
 
 const SIGNALS = {
@@ -75,11 +75,17 @@ func interact_available(body) -> void:
 	return
 
 func interact_not_available(body) -> void:
+	if !(body.is_in_group("interactable") or body.is_in_group("inspectable")):
+		return
+	#print("cannot interact anymore")
 	interactable = null # clearing the reference
 	disconnect(SIGNALS[CODES["INTERACT"]], Callable(body, "interact"))
+	#print(body.is_in_group("interactable"))
+	#print(body)
 	if body.is_in_group("interactable"):
 		talk_prompt.visible = false
 		talk_prompt.stop()
+		#print("Updated prompt")
 	else:
 		inspect_prompt.visible = false
 		inspect_prompt.stop()
@@ -88,12 +94,14 @@ func interact_not_available(body) -> void:
 	return
 	
 func _unhandled_input(event: InputEvent) -> void:
+	if dialogue_box.visible or popup_layer.visible:
+		return
 	if !(event is InputEventKey):
 		return
 	if !(event.keycode in SIGNALS):
 		return
 	emit_signal(SIGNALS[event.keycode])
-	if interactable:
+	if interactable: # check if there's a reference stored
 		# break the connection once FIRST interact signal has been emitted
 		# this will prevent restart of interaction
 		disconnect(SIGNALS[CODES["INTERACT"]], Callable(interactable, "interact"))
