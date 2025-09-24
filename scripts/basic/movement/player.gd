@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var dialogue_box: CanvasLayer
 @export var popup_layer: CanvasLayer
 @export var sprite: Sprite2D
+@export var prompt_interact: AnimatedSprite2D
 
 var interactable: Node2D = null
 
@@ -56,6 +57,8 @@ func interact_available(body) -> void:
 	if !(body.is_in_group("interactable")):
 		return
 	print("Press INTERACT button to interact!")
+	prompt_interact.visible = true
+	prompt_interact.play("default")
 	interactable = body # saving the reference so that it can be disconnected when interacting
 	connect(SIGNALS[CODES["INTERACT"]], Callable(body, "interact"))
 	# this is better than flags
@@ -66,6 +69,8 @@ func interact_available(body) -> void:
 func interact_not_available(body) -> void:
 	interactable = null # clearing the reference
 	disconnect(SIGNALS[CODES["INTERACT"]], Callable(body, "interact"))
+	prompt_interact.stop()
+	prompt_interact.visible = false
 	return
 	
 func _unhandled_input(event: InputEvent) -> void:

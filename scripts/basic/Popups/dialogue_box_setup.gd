@@ -23,7 +23,7 @@ func setup_dialogue_box() -> void:
 	var viewport = Vector2(get_viewport().size.x, get_viewport().size.y)
 	panel.size = viewport
 	panel.size.x -= 20
-	panel.size.y = 400
+	panel.size.y = (get_viewport().size.y * 0.4) as int
 	panel.position = Vector2(10, viewport.y - panel.size.y - 10)
 	name_label.add_theme_font_size_override("normal_font_size", 42)
 	text_label.add_theme_font_size_override("normal_font_size", 36)
