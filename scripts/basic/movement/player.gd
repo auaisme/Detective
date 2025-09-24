@@ -5,6 +5,8 @@ extends CharacterBody2D
 @export var popup_layer: CanvasLayer
 @export var sprite: Sprite2D
 @export var prompt_interact: AnimatedSprite2D
+@export var inspect_prompt: AnimatedSprite2D
+@export var talk_prompt: AnimatedSprite2D
 
 var interactable: Node2D = null
 
@@ -37,7 +39,7 @@ func _physics_process(delta: float) -> void:
 func measure_movement_input() -> void:
 	velocity.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	velocity.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	print(velocity)
+	#print(velocity)
 	if (velocity.x < 0):
 		sprite.flip_h = true
 	elif (velocity.x > 0):
@@ -54,9 +56,15 @@ func move() -> void:
 	move_and_slide()
 
 func interact_available(body) -> void:
-	if !(body.is_in_group("interactable")):
+	if !(body.is_in_group("interactable") or body.is_in_group("inspectable")):
 		return
-	print("Press INTERACT button to interact!")
+	if body.is_in_group("interactable"):
+		talk_prompt.visible = true
+		talk_prompt.play("default")
+	else:
+		inspect_prompt.visible = true
+		inspect_prompt.play("default")
+	#print("Press INTERACT button to interact!")
 	prompt_interact.visible = true
 	prompt_interact.play("default")
 	interactable = body # saving the reference so that it can be disconnected when interacting
@@ -69,6 +77,12 @@ func interact_available(body) -> void:
 func interact_not_available(body) -> void:
 	interactable = null # clearing the reference
 	disconnect(SIGNALS[CODES["INTERACT"]], Callable(body, "interact"))
+	if body.is_in_group("interactable"):
+		talk_prompt.visible = false
+		talk_prompt.stop()
+	else:
+		inspect_prompt.visible = false
+		inspect_prompt.stop()
 	prompt_interact.stop()
 	prompt_interact.visible = false
 	return

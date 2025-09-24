@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 player="The group for player level"
 interactable="The group for interactable items"
+inspectable="Can be inspected"
 
 [input]
 
