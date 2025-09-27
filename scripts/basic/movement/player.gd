@@ -61,15 +61,16 @@ func move() -> void:
 func interact_available(body) -> void:
 	if !(body.is_in_group("interactable") or body.is_in_group("inspectable")):
 		return
-	if body.is_in_group("interactable"):
-		talk_prompt.visible = true
-		talk_prompt.play("default")
-	else:
-		inspect_prompt.visible = true
-		inspect_prompt.play("default")
-	#print("Press INTERACT button to interact!")
-	prompt_interact.visible = true
-	prompt_interact.play("default")
+	prompt_visibility(body, true)
+	#if body.is_in_group("interactable"):
+		#talk_prompt.visible = true
+		#talk_prompt.play("default")
+	#else:
+		#inspect_prompt.visible = true
+		#inspect_prompt.play("default")
+	##print("Press INTERACT button to interact!")
+	#prompt_interact.visible = true
+	#prompt_interact.play("default")
 	interactable = body # saving the reference so that it can be disconnected when interacting
 	connect(SIGNALS[CODES["INTERACT"]], Callable(body, "interact"))
 	# this is better than flags
@@ -85,15 +86,27 @@ func interact_not_available(body) -> void:
 	disconnect(SIGNALS[CODES["INTERACT"]], Callable(body, "interact"))
 	#print(body.is_in_group("interactable"))
 	#print(body)
+	prompt_visibility(body, false)
+	#if body.is_in_group("interactable"):
+		#talk_prompt.visible = false
+		#talk_prompt.stop()
+		##print("Updated prompt")
+	#else:
+		#inspect_prompt.visible = false
+		#inspect_prompt.stop()
+	#prompt_interact.stop()
+	#prompt_interact.visible = false
+	return
+	
+func prompt_visibility(body, is_visible: bool):
 	if body.is_in_group("interactable"):
-		talk_prompt.visible = false
-		talk_prompt.stop()
-		#print("Updated prompt")
+		talk_prompt.visible = is_visible
+		talk_prompt.play("default") if is_visible else talk_prompt.stop()
 	else:
-		inspect_prompt.visible = false
-		inspect_prompt.stop()
-	prompt_interact.stop()
-	prompt_interact.visible = false
+		inspect_prompt.visible = is_visible
+		inspect_prompt.play("default") if is_visible else inspect_prompt.stop()
+	prompt_interact.visible = is_visible
+	prompt_interact.play("default") if is_visible else prompt_interact.stop()
 	return
 	
 func _unhandled_input(event: InputEvent) -> void:
@@ -108,4 +121,5 @@ func _unhandled_input(event: InputEvent) -> void:
 		# break the connection once FIRST interact signal has been emitted
 		# this will prevent restart of interaction
 		disconnect(SIGNALS[CODES["INTERACT"]], Callable(interactable, "interact"))
+		prompt_visibility(interactable, false)
 	return
