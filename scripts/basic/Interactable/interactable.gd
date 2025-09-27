@@ -5,6 +5,10 @@ extends RigidBody2D
 
 @export var dialogue_script_path: String
 
+@export var dialogic_timeline: String
+
+@export var camera: Camera2D
+
 var _dialgoue: Array = [
 		{
 			"name": "Change Me Later LORUM IPSUM SANTICS STATUM",
@@ -24,10 +28,11 @@ var _dialgoue: Array = [
 	]
 
 func _ready() -> void:
-	var temp = load_json()
-	#print(temp)
-	if temp.size() > 0:
-		_dialgoue = temp
+	if not dialogic_timeline:
+		var temp = load_json()
+		#print(temp)
+		if temp.size() > 0:
+			_dialgoue = temp
 	return
 
 func _process(delta: float) -> void:
@@ -35,7 +40,11 @@ func _process(delta: float) -> void:
 	
 func interact() -> void:
 	#print("ITEM ITERACTED")
-	scene_base.start_dialogue(_dialgoue)
+	if dialogic_timeline:
+		var dialogue = Dialogic.start(dialogic_timeline)
+		camera.add_child(dialogue)
+	else:
+		scene_base.start_dialogue(_dialgoue)
 	return
 
 func load_json() -> Array:

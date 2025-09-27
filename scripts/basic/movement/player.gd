@@ -39,6 +39,10 @@ func _physics_process(delta: float) -> void:
 	return
 
 func measure_movement_input() -> void:
+	if ($Camera2D.get_children().size() > 0):
+#		this means that dialogic is running so we are gonna block movement
+#		this may be a bit slow so we should maybe switch to a flag based system
+		return
 	velocity.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	velocity.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	#print(velocity)

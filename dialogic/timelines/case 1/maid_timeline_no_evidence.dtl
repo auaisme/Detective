@@ -1,0 +1,23 @@
+detective: Good evening, ma'am. Could you tell me everything you know about the murder?
+maid: I-- I don't know what happened!! I came in to get them some fresh towels an--and they were dead!
+label Choice 1
+- Who opened the door?
+	maid: I did, with my master-key.
+	label Open Door Doubt
+	- Doubt
+		detective: It's a bit odd that you would just open a closed door to an occupied room, no?
+		maid: Yo-you don't think I did this?! Hotel policy is to knock three times, and if they don't answer and don't have a 'do not disturb" sign, we let ourselves in. We have to, to clean the room while they're out.
+	- * say nothing *
+	jump Choice 1
+- Who asked for towels?
+	detective: Did someone call the front-desk for towels?
+	maid: No, we have a schedule for changing the towels.
+	jump Choice 1
+- Anyone else present?
+	detective: Did you see anyone else with the victim?
+	maid: I-- I don't remember, I'm sorry!
+	jump Choice 1
+- * say nothing *
+detective: It's alright, ma'am, take some deep breaths. Everything will be alright.
+detective: ...
+detective: But, please, try to remember everything that you can.
