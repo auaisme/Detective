@@ -18,4 +18,5 @@ func interact() -> void:
 		panel.position = Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2)
 		panel.size = Vector2(0, 0)
 		display_me.visible = true
+		Dialogic.VAR["has_seen_glasses"] = true
 	return

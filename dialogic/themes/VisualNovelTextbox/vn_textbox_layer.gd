@@ -114,13 +114,6 @@ enum AnimationsNewText {NONE, WIGGLE}
 @export_range(0.0, 10) var typing_sounds_volume_variance: float = 0.0
 @export var typing_sounds_ignore_characters: String = " .,!?"
 
-# Custom
-func _ready() -> void:
-	box_size.x = get_viewport().size.x * 0.8
-	name_label_box_offset.y = -15
-	_apply_export_overrides()
-	return
-# End Custom
 
 func _apply_export_overrides() -> void:
 	if !is_inside_tree():

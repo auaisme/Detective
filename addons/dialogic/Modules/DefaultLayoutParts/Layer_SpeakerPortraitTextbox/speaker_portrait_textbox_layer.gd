@@ -50,7 +50,7 @@ enum NameLabelColorModes {GLOBAL_COLOR, CHARACTER_COLOR, CUSTOM_COLOR}
 
 
 ## Called by dialogic whenever export overrides might change
-func _apply_export_overrides() -> void:
+func _apply_export_overrides() -> void:	
 	## FONT SETTINGS
 	var dialog_text: DialogicNode_DialogText = %DialogicNode_DialogText
 	dialog_text.alignment = text_alignment as DialogicNode_DialogText.Alignment
@@ -127,3 +127,9 @@ func _apply_export_overrides() -> void:
 
 	name_label.horizontal_alignment = name_label_alignment as HorizontalAlignment
 	name_label.hide_when_empty = name_label_hide_when_no_character
+
+# Custom
+func _ready() -> void:
+	box_size.x = get_viewport().size.x * 0.8
+	apply_export_overrides()
+	return

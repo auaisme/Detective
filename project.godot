@@ -29,7 +29,8 @@ directories/dtl_directory={
 "maid_timeline_no_evidence": "res://dialogic/timelines/case 1/maid_timeline_no_evidence.dtl"
 }
 layout/style_directory={
-"": "res://dialogic/themes/with_portrait.tres",
+"": "res://dialogic/themes/no_portraits.tres",
+"no_portraits": "res://dialogic/themes/no_portraits.tres",
 "with_portrait": "res://dialogic/themes/with_portrait.tres"
 }
 extensions_folder="res://addons/dialogic_additions"
@@ -67,11 +68,16 @@ audio/channel_defaults={
 }
 }
 glossary/default_case_sensitive=true
-layout/style_list=["res://dialogic/themes/with_portrait.tres"]
-layout/default_style="res://dialogic/themes/with_portrait.tres"
-variables={}
+layout/style_list=["res://dialogic/themes/with_portrait.tres", "res://dialogic/themes/no_portraits.tres"]
+layout/default_style="res://dialogic/themes/no_portraits.tres"
+variables={
+"has_discovered_suspect": false,
+"has_seen_glasses": false
+}
 text/input_action="interact"
 text/autocolor_names=false
+animations/join_default="Slide From Left"
+animations/leave_default="Slide To Left"
 
 [editor_plugins]
 

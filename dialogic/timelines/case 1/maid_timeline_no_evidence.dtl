@@ -17,7 +17,16 @@ label Choice 1
 	detective: Did you see anyone else with the victim?
 	maid: I-- I don't remember, I'm sorry!
 	jump Choice 1
-- * say nothing *
-detective: It's alright, ma'am, take some deep breaths. Everything will be alright.
-detective: ...
-detective: But, please, try to remember everything that you can.
+- Lady partner? | [if {has_seen_glasses} == true] [else="hide"]
+	detective: Ma'am, was there a lady with this man?
+	maid: Now that you mention it... Yes, a young, classy woman checked in with him. They got separate rooms though... She was in room B 3.
+	set {has_discovered_suspect} = true
+	[signal arg_type="dict" arg="{"maid_confirmed_lady":true}"]
+	jump Choice 1
+- * end conversation *
+if {has_discovered_suspect} == true:
+	detective: Thank you, ma'am. You have been incredibly helpful.
+else:
+	detective: It's alright, ma'am, take some deep breaths. Everything will be alright.
+	detective: ...
+	detective: But, please, try to remember everything that you can.
