@@ -1,8 +1,18 @@
 extends RigidBody2D
 
+@export_group("pop ups")
 @export var popup_layer: CanvasLayer
 @export var display_me: CanvasLayer
 @export var panel: Panel
+
+@export_group("camera")
+@export var camera: Camera2D
+
+@export_group("dialogic")
+@export var timeline: DialogicTimeline
+
+@export_group("draw layer")
+@export var layer: int = 50
 
 #func interact() -> void:
 	#print("ITEM INSPECTED")
@@ -18,5 +28,7 @@ func interact() -> void:
 		panel.position = Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2)
 		panel.size = Vector2(0, 0)
 		display_me.visible = true
-		Dialogic.VAR["has_seen_glasses"] = true
+		var dialogue = Dialogic.start(timeline)
+		dialogue.layer = 50;
+		camera.add_child(dialogue)
 	return

@@ -1,10 +1,12 @@
 extends Control
 
+@export_group("Pop ups")
 @export var dead_body_pop_up: CanvasLayer
 @export var glasses_pop_up: CanvasLayer
 
 var POP_UPS: Dictionary[String, CanvasLayer] = {}
 
+@export_group("Dialogue Box Custom")
 @export var dialogue_box: CanvasLayer
 @export var panel: Panel
 @onready var name_label: RichTextLabel = panel.get_node("Name")
@@ -21,6 +23,9 @@ const COLORS = {
 	"OBJECT": Color.DARK_GRAY,
 	"SUSPECT": Color.CRIMSON
 }
+
+@export_group("Camera")
+@export var camera: Camera2D
 
 func _ready() -> void:
 	POP_UPS = {
@@ -68,6 +73,6 @@ func _input(event):
 				display_line()
 			else:
 				dialogue_box.hide()
-		elif (active_pop_up):
+		elif (active_pop_up and camera.get_child_count() == 0):
 			active_pop_up[0].hide()
 			pass

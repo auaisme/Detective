@@ -26,6 +26,8 @@ directories/dch_directory={
 "maid": "res://characters/case 1/maid.dch"
 }
 directories/dtl_directory={
+"case 1/inspect_body_timeline": "res://dialogic/timelines/case 1/inspect_body_timeline.dtl",
+"case 1/inspect_classes_timeline": "res://dialogic/timelines/case 1/inspect_classes_timeline.dtl",
 "maid_timeline_no_evidence": "res://dialogic/timelines/case 1/maid_timeline_no_evidence.dtl"
 }
 layout/style_directory={
