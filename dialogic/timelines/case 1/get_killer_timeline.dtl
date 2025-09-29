@@ -1,0 +1,29 @@
+policeman: Yes, detective. How may I help you?
+label Main Choice
+- Get Suspect | [if {has_discovered_suspect} == true]
+	detective: I have a identified a suspect.
+	policeman: As expected of the 'Wunderkind'! Who is it?
+	detective: There should be a lady in room B 3. Could you go and detain her for questioning?
+	policeman: Certainly; right away, sir!
+	[signal arg_type="dict" arg="{"get_killer":true}"]
+- What happened?
+	detective: So, what happened here?
+	policeman: Right. Half an hour ago, we recieved a call from the manager of this here hotel.
+	policeman: Apparently, that maid there entered this room to find the victim dead.
+	policeman: The victim had checked in earlier the same day.
+	policeman: There were no signs of forced entry, and no valuables were taken.
+	policeman: Whoever killed him was really out for him; the body was stabbed over 28 times. He died slow.
+	policeman: ...
+	policeman: And bad...
+	policeman: That's all we know so far.
+	detective: Thanks.
+	jump Main Choice
+- Nothing
+	detective: Could you... Actually, forget about it.
+	policeman: ...
+	policeman: Right, let me know if you need anything, sir.
+	detective: Oh, actually, could you get me an early copy of GTA 6?
+	policeman: ...
+	detective: ...
+	* I think I'd better change the topic *
+	jump Main Choice
