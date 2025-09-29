@@ -63,18 +63,9 @@ func move() -> void:
 	move_and_slide()
 
 func interact_available(body) -> void:
-	if !(body.is_in_group("interactable") or body.is_in_group("inspectable")):
+	if !(body.is_in_group("interactable") or body.is_in_group("inspectable")) or interactable:
 		return
 	prompt_visibility(body, true)
-	#if body.is_in_group("interactable"):
-		#talk_prompt.visible = true
-		#talk_prompt.play("default")
-	#else:
-		#inspect_prompt.visible = true
-		#inspect_prompt.play("default")
-	##print("Press INTERACT button to interact!")
-	#prompt_interact.visible = true
-	#prompt_interact.play("default")
 	interactable = body # saving the reference so that it can be disconnected when interacting
 	connect(SIGNALS[CODES["INTERACT"]], Callable(body, "interact"))
 	# this is better than flags
@@ -83,7 +74,7 @@ func interact_available(body) -> void:
 	return
 
 func interact_not_available(body) -> void:
-	if !(body.is_in_group("interactable") or body.is_in_group("inspectable")):
+	if !(body.is_in_group("interactable") or body.is_in_group("inspectable")) or body != interactable:
 		return
 	#print("cannot interact anymore")
 	interactable = null # clearing the reference
@@ -91,15 +82,6 @@ func interact_not_available(body) -> void:
 	#print(body.is_in_group("interactable"))
 	#print(body)
 	prompt_visibility(body, false)
-	#if body.is_in_group("interactable"):
-		#talk_prompt.visible = false
-		#talk_prompt.stop()
-		##print("Updated prompt")
-	#else:
-		#inspect_prompt.visible = false
-		#inspect_prompt.stop()
-	#prompt_interact.stop()
-	#prompt_interact.visible = false
 	return
 	
 func prompt_visibility(body, is_visible: bool):

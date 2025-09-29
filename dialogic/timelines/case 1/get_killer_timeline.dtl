@@ -25,5 +25,5 @@ label Main Choice
 	detective: Oh, actually, could you get me an early copy of GTA 6?
 	policeman: ...
 	detective: ...
-	* I think I'd better change the topic *
-	jump Main Choice
+	* I think I'd better leave *
+	[end_timeline]
