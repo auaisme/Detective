@@ -23,6 +23,7 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 directories/dch_directory={
 "detective": "res://characters/persistent/detective.dch",
+"killer": "res://characters/case 1/killer.dch",
 "maid": "res://characters/case 1/maid.dch",
 "policeman": "res://characters/persistent/policeman.dch"
 }
@@ -30,6 +31,7 @@ directories/dtl_directory={
 "case 1/inspect_body_timeline": "res://dialogic/timelines/case 1/inspect_body_timeline.dtl",
 "case 1/inspect_classes_timeline": "res://dialogic/timelines/case 1/inspect_classes_timeline.dtl",
 "get_killer_timeline": "res://dialogic/timelines/case 1/get_killer_timeline.dtl",
+"killer_first_timeline": "res://dialogic/timelines/case 1/killer_first_timeline.dtl",
 "maid_timeline_no_evidence": "res://dialogic/timelines/case 1/maid_timeline_no_evidence.dtl"
 }
 layout/style_directory={
@@ -76,7 +78,8 @@ layout/style_list=["res://dialogic/themes/with_portrait.tres", "res://dialogic/t
 layout/default_style="res://dialogic/themes/no_portraits.tres"
 variables={
 "has_discovered_suspect": false,
-"has_seen_glasses": false
+"has_seen_glasses": false,
+"killer_anxiety": 0
 }
 text/input_action="interact"
 text/autocolor_names=false

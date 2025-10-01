@@ -1,0 +1,67 @@
+# During the pivotal choices, we increase the anxiety (and decrease if the player does something dumb).
+# We should limit their attempts tbh. Have differing versions for every conversation linked to the anxiety
+killer: What's going on?
+detective: Good evening, ma'am. Pardon our demeanor. We have some questions, if you don't mind answering.
+killer: About the murder?
+* She is neither worried nor anxious in the slightest-- she seems more annoyed than anything. *
+label Choice 1
+- Who told you?
+	detective: I never said anything about a murder.
+	killer: Oh, let's see here... there's a rancid smell hanging in the air, cops have swarmed the hotel, we're not allowed to leave our rooms, yeahhh it doesn't take a rocket scientist to figure it out.
+	detective: ...
+- You're oddly calm
+	detective: You seem awfully calm.
+	killer: Why wouldn't I be?
+	detective: A man is brutally killed in his room; that would make anyone nervous.
+	killer: People die everyday, big whoop. The biggest killer in the world is car crashes, should I be panicing everytime I'm in a car?
+	- Press
+		detective: Oh, so you don't fear death?
+		killer: I fear it if it's imminent, sure.
+		detective: And how about life in prison with no parole? Does that scare you?
+		killer: ...
+		killer: What are you suggesting?
+		label Pivotal Choice 1
+		- Facts
+			detective: That man... he checked in today.
+			killer: ...
+			detective: Same time as you, actually.
+			killer: So, it's a crime to check into a hotel within a few minutes as another person?
+			detective: There were no signs of a struggle and the door was locked with a key.
+			detective: No valuables were taken either.
+			detective: The killer knew him.
+			killer: And... you're telling me this because?
+			detective: Just showcasing where the tax dollars go-- We ALWAYS find the killer.
+			set {killer_anxiety} += 1.0
+			jump Pivotal Choice 1
+		- Bluff
+			detective: Have you heard about fingerprints? That they're unique to everyone?
+			killer: ...
+			detective: Well, it ain't just finger prints. Lip prints, palm prints, DNA, even hair can be used for identification.
+			detective: Oh, and no matter how hard you try; your DNA, hair, and prints get all over the place.
+			detective: Killers often forget to wipe the crime scene clean.
+			detective: Take this case, for example.
+			* She is starting to look anxious *
+			detective: There may not be any signs of a fight, but when you're killing someone; it takes a lot of effort.
+			detective: The blood gets everywhere; and it stays, too. In the clothes, hair, even on the skin. It stays for years.
+			detective: And often we find the killer's DNA on the body as well. Under the nails, for example; it's very hard to not get scratched.
+			* She is taking deep breathes *
+			killer: So-so you think this killer left evidence?
+			detective: Oh, most certainly. See those wine glasses?
+			detective: I bet we could get the killer's DNA from the alchohol.
+			detective: I bet we could find them using that lipstick stain.
+			* She is shaking *
+			set {killer_anxiety} += 1.0
+			jump Pivotal Choice 1
+		- Analyze
+		- * Back Off *
+			detective: ...
+			detective: I'm not too sure myself! BWAHAHAHAHA
+			killer: ...
+			detective: ...
+			killer: Can I go already?
+			jump Choice 1
+	- * Back Off *
+		jump Choice 1
+- You killed him!
+- * End Conversation *
+	detective: Thank you for your cooperation, ma'am. I need to ask you to stay a while; I hope you understand?

@@ -1,0 +1,21 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": NodePath(""),
+&"_translation_id": "",
+&"color": Color(0, 0.564706, 0, 1),
+&"custom_info": {
+"prefix": "",
+"sound_mood_default": "",
+"sound_moods": {},
+"style": "",
+"suffix": ""
+},
+&"default_portrait": "",
+&"description": "She's the killer; kinda psychopathic; did it because the victim would harass her and her crush every day. Wanted him to be seen as a fuck boy who got what he deserved.",
+&"display_name": "Lady",
+&"mirror": false,
+&"nicknames": ["killer", "Aria"],
+&"offset": Vector2(0, 0),
+&"portraits": {},
+&"scale": 1.0
+}

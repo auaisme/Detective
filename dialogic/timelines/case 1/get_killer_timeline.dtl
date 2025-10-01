@@ -5,7 +5,7 @@ label Main Choice
 	policeman: As expected of the 'Wunderkind'! Who is it?
 	detective: There should be a lady in room B 3. Could you go and detain her for questioning?
 	policeman: Certainly; right away, sir!
-	[signal arg_type="dict" arg="{"get_killer":true}"]
+	[signal arg="get_killer"]
 - What happened?
 	detective: So, what happened here?
 	policeman: Right. Half an hour ago, we recieved a call from the manager of this here hotel.

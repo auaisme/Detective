@@ -1,13 +1,16 @@
 extends RigidBody2D
 
+@export_group("Custom Dialogue")
 @export var dialogue_box: CanvasLayer
 @export var scene_base: Control
-
 @export var dialogue_script_path: String
 
+@export_group("Dialogic")
 @export var dialogic_timeline: String
-
 @export var camera: Camera2D
+
+@export_group("Role")
+@export var is_killer: bool
 
 var _dialgoue: Array = [
 		{
@@ -33,6 +36,8 @@ func _ready() -> void:
 		#print(temp)
 		if temp.size() > 0:
 			_dialgoue = temp
+	elif is_killer:		
+		Dialogic.signal_event.connect(get_summoned)
 	return
 
 func _process(delta: float) -> void:
@@ -45,6 +50,15 @@ func interact() -> void:
 		camera.add_child(dialogue)
 	else:
 		scene_base.start_dialogue(_dialgoue)
+	return
+
+func get_summoned(name: String, value):
+	if not is_killer:
+		return
+	if name != "get_killer":
+		return
+	print(name, value)
+	self.visible = true
 	return
 
 func load_json() -> Array:
