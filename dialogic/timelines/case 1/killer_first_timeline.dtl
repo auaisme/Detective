@@ -9,6 +9,7 @@ label Choice 1
 	detective: I never said anything about a murder.
 	killer: Oh, let's see here... there's a rancid smell hanging in the air, cops have swarmed the hotel, we're not allowed to leave our rooms, yeahhh it doesn't take a rocket scientist to figure it out.
 	detective: ...
+	jump Choice 1
 - You're oddly calm
 	detective: You seem awfully calm.
 	killer: Why wouldn't I be?
@@ -31,7 +32,8 @@ label Choice 1
 			detective: The killer knew him.
 			killer: And... you're telling me this because?
 			detective: Just showcasing where the tax dollars go-- We ALWAYS find the killer.
-			set {killer_anxiety} += 1.0
+			if {killer_anxiety} < 2.0:
+				set {killer_anxiety} += 1.0
 			jump Pivotal Choice 1
 		- Bluff
 			detective: Have you heard about fingerprints? That they're unique to everyone?
@@ -50,11 +52,37 @@ label Choice 1
 			detective: I bet we could get the killer's DNA from the alchohol.
 			detective: I bet we could find them using that lipstick stain.
 			* She is shaking *
-			set {killer_anxiety} += 1.0
+			if {killer_anxiety} < 2.0:
+				set {killer_anxiety} += 1.0
 			jump Pivotal Choice 1
 		- Analyze
+			if {killer_anxiety} == 0.0:
+				detective: You knew him, didn't you?
+				killer: ...
+				killer: No, I did not.
+				detective: You hated him, didn't you?
+				killer: Are you just going to keep hurling these nonsensical accusations my way? I would like to leave now.
+				* I need maker her anxious first *
+				jump Pivotal Choice 1
+			elif {killer_anxiety} >= 2.0:
+				detective: We know you knew him. Denying won't help you at all.
+				killer: Okay, fine! Yes, I knew him! But-- but that's it!
+				detective: And you hated him.
+				killer: Oh, stop your judgement! Yes, I hated him!
+				killer: I hated the way he looked at me!
+				killer: I hated the way he looked at my beloved!
+				killer: I hated how he kept getting away with it all!
+				killer: It's all your fault!
+				set {killer_anxiety} = 3.0
+				jump Choice 1
+			elif {killer_anxiety} == 1.0:
+				detective: You knew him, didn't you?
+				killer: ... I- I did not...
+				detective: You hated him didn't you?
+				killer: I- I don't even know him!!
+				* Almost there, if I can make her a little more nervous, she will confess *
+				jump Pivotal Choice 1
 		- * Back Off *
-			detective: ...
 			detective: I'm not too sure myself! BWAHAHAHAHA
 			killer: ...
 			detective: ...
@@ -63,5 +91,38 @@ label Choice 1
 	- * Back Off *
 		jump Choice 1
 - You killed him!
+	if {killer_anxiety} == 3.0:
+		# She confessed to hating him
+		detective: We know you killed him. Only question is why.
+		killer: I-- Fine! Yes! I killed him!
+		killer: And he had it coming to!
+		killer: That bastard should have been rotting behind bars for his entire life!
+		detective: Why?
+		killer: He rapes us.
+		killer: He raped my friend.
+		killer: He raped my seniors.
+		killer: And because of his money, he kept getting away with it!
+		killer: He would bring us on "business trips", and then rape us.
+		killer: He had been eyeing me and my beloved for some time now...
+		killer: And, so, I decided that I had to make this monster pay.
+		detective: Why didn't you come to the police?
+		killer: I did! We all did!
+		killer: But you bastards never did anything about it!
+		killer: You're just as bad as him, you are all monsters!
+		detective: ...
+		detective: I am just as frustrated as you that he got away with his crimes.
+		detective: But you are not the judge; you cannot take the law in your own hands.
+		detective: Reflect on that in prison, for that will be your home for the rest of your life.
+		killer: FUCK.
+		killer: YOU.
+		[signal arg="confessed"]
+		[end_timeline]
+	elif {killer_anxiety} == 2.0:
+		jump Choice 1
+	elif {killer_anxiety} == 1.0:
+		jump Choice 1
+	else:
+		jump Choice 1
 - * End Conversation *
 	detective: Thank you for your cooperation, ma'am. I need to ask you to stay a while; I hope you understand?
+	[end_timeline]

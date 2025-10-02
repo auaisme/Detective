@@ -16528,7 +16528,6 @@ shape = SubResource("RectangleShape2D_k71ds")
 texture = ExtResource("11_k71ds")
 
 [node name="Interactable Killer" type="RigidBody2D" parent="." node_paths=PackedStringArray("dialogue_box", "scene_base", "camera") groups=["interactable"]]
-visible = false
 position = Vector2(278, 147)
 gravity_scale = 0.0
 lock_rotation = true
@@ -16537,7 +16536,7 @@ script = ExtResource("3_l20p6")
 dialogue_box = NodePath("../Dialogue")
 scene_base = NodePath("..")
 dialogue_script_path = "res://dialogue scripts/demo scene/test.json"
-dialogic_timeline = "res://dialogic/timelines/case 1/get_killer_timeline.dtl"
+dialogic_timeline = "killer_first_timeline"
 camera = NodePath("../Player/Camera2D")
 is_killer = true
 
