@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dbxxl4md3o4e3"
+path="res://.godot/imported/[CRIME 2] road-to-peace-391119.mp3-a853adff6674790e40ac4ec7241d506a.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Music/Background Tracks/[CRIME 2] road-to-peace-391119.mp3"
+dest_files=["res://.godot/imported/[CRIME 2] road-to-peace-391119.mp3-a853adff6674790e40ac4ec7241d506a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dedu1jborpp2f"
+path="res://.godot/imported/[CRIME 1] smoking-noir-true-crime-and-thriller-music-loopable-304055.mp3-2ee221147594aa1fefc72d7bcbbe36e9.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Music/Background Tracks/[CRIME 1] smoking-noir-true-crime-and-thriller-music-loopable-304055.mp3"
+dest_files=["res://.godot/imported/[CRIME 1] smoking-noir-true-crime-and-thriller-music-loopable-304055.mp3-2ee221147594aa1fefc72d7bcbbe36e9.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

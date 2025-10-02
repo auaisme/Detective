@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://csp1bpvgytwx5"
+path="res://.godot/imported/[tension building] cinematic-shadows-noir-soundscapes-365176.mp3-2aeda25dd809cd37f256c52441a41493.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Music/Background Tracks/[tension building] cinematic-shadows-noir-soundscapes-365176.mp3"
+dest_files=["res://.godot/imported/[tension building] cinematic-shadows-noir-soundscapes-365176.mp3-2aeda25dd809cd37f256c52441a41493.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

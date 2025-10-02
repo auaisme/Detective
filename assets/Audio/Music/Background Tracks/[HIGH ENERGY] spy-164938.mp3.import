@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://vwwebqekci01"
+path="res://.godot/imported/[HIGH ENERGY] spy-164938.mp3-5d25c3bf42a083f23f07a108c398b736.mp3str"
+
+[deps]
+
+source_file="res://assets/Audio/Music/Background Tracks/[HIGH ENERGY] spy-164938.mp3"
+dest_files=["res://.godot/imported/[HIGH ENERGY] spy-164938.mp3-5d25c3bf42a083f23f07a108c398b736.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

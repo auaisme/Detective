@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=4 uid="uid://x4eo8pq6pluy"]
+[gd_scene load_steps=72 format=4 uid="uid://x4eo8pq6pluy"]
 
 [ext_resource type="Script" uid="uid://j3t6t45v4hti" path="res://scripts/basic/movement/player.gd" id="1_ba4lm"]
 [ext_resource type="Script" uid="uid://bhq28ttricpf4" path="res://scripts/basic/Popups/dialogue_box_setup.gd" id="1_vephn"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://cq2i0dqdcja6a" path="res://assets/prompts/E_pixels.png" id="7_7hm0d"]
 [ext_resource type="Texture2D" uid="uid://bu074qtn8f3eg" path="res://assets/characters/case 1/pixels_dead_body_1.png" id="8_5fme1"]
 [ext_resource type="Texture2D" uid="uid://1uy1luyogyed" path="res://assets/prompts/magnifying_glass_pixels.png" id="8_l53ft"]
+[ext_resource type="AudioStream" uid="uid://dedu1jborpp2f" path="res://assets/Audio/Music/Background Tracks/[CRIME 1] smoking-noir-true-crime-and-thriller-music-loopable-304055.mp3" id="9_3mope"]
 [ext_resource type="Texture2D" uid="uid://cgeflsysp3dhd" path="res://assets/prompts/speach_bubble_pixels.png" id="9_xe7ic"]
 [ext_resource type="Texture2D" uid="uid://buk8i0v5nqidy" path="res://assets/characters/overall/pixels_policeman.png" id="11_k71ds"]
 [ext_resource type="Texture2D" uid="uid://dud28vvdm2hjh" path="res://assets/characters/case 1/pixels_killer_1.png" id="12_b63qt"]
@@ -16396,6 +16397,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 15.0
+offset_right = 13.0
+offset_bottom = 15.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vephn")
@@ -16489,6 +16494,13 @@ position = Vector2(17, -93)
 scale = Vector2(1.46875, 1.40625)
 sprite_frames = SubResource("SpriteFrames_dgtg0")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-1, -1)
+stream = ExtResource("9_3mope")
+volume_db = -20.8
+autoplay = true
+parameters/looping = true
+
 [node name="Interactable Maid" type="RigidBody2D" parent="." node_paths=PackedStringArray("dialogue_box", "scene_base", "camera") groups=["interactable"]]
 position = Vector2(274, -82)
 gravity_scale = 0.0
@@ -16528,7 +16540,8 @@ shape = SubResource("RectangleShape2D_k71ds")
 texture = ExtResource("11_k71ds")
 
 [node name="Interactable Killer" type="RigidBody2D" parent="." node_paths=PackedStringArray("dialogue_box", "scene_base", "camera") groups=["interactable"]]
-position = Vector2(278, 147)
+visible = false
+position = Vector2(257, 553)
 gravity_scale = 0.0
 lock_rotation = true
 freeze = true
@@ -16541,8 +16554,8 @@ camera = NodePath("../Player/Camera2D")
 is_killer = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactable Killer"]
-position = Vector2(-0.5, -1.5)
 shape = SubResource("RectangleShape2D_3mope")
+disabled = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Interactable Killer"]
 texture = ExtResource("12_b63qt")

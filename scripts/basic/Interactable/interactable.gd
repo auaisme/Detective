@@ -12,6 +12,9 @@ extends RigidBody2D
 @export_group("Role")
 @export var is_killer: bool
 
+@export_group("Target Position")
+@export var target_position = Vector2(269.0, 150.0)
+
 var _dialgoue: Array = [
 		{
 			"name": "Change Me Later LORUM IPSUM SANTICS STATUM",
@@ -36,7 +39,7 @@ func _ready() -> void:
 		#print(temp)
 		if temp.size() > 0:
 			_dialgoue = temp
-	elif is_killer:		
+	elif is_killer:
 		Dialogic.signal_event.connect(get_summoned)
 	return
 
@@ -52,13 +55,17 @@ func interact() -> void:
 		scene_base.start_dialogue(_dialgoue)
 	return
 
-func get_summoned(name: String, value):
+func get_summoned(signal_name: String):
+	print(signal_name)
 	if not is_killer:
 		return
-	if name != "get_killer":
+	if signal_name != "get_killer":
 		return
-	print(name, value)
+	print("Getting Killer")
 	self.visible = true
+	$CollisionShape2D.disabled = false
+	var tween = create_tween()
+	tween.tween_property(self, "position", target_position, 2.0)
 	return
 
 func load_json() -> Array:
